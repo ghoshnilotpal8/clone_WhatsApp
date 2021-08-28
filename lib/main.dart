@@ -148,19 +148,25 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   Widget fab() {
     return Stack(
       children: [
-        Transform.translate(
-          offset: Offset(4, _miniFabAnimation.value),
-          child: FloatingActionButton(
-            mini: true,
-            onPressed: () {},
-            tooltip: 'add status',
-            child: Icon(Icons.edit),
-          ),
-        ),
+        AnimatedBuilder(
+            animation: _miniFabAnimationController,
+            builder: (context, child) {
+              return Transform.translate(
+                offset: Offset(4, _miniFabAnimation.value),
+                child: FloatingActionButton(
+                  mini: true,
+                  onPressed: () {},
+                  tooltip: 'add status',
+                  child: Icon(Icons.edit),
+                  heroTag: null,
+                ),
+              );
+            }),
         FloatingActionButton(
           onPressed: () {},
           tooltip: 'Action',
           child: iconSelectionFunction(),
+          heroTag: null,
         ),
       ],
     );

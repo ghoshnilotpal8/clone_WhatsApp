@@ -1,8 +1,6 @@
-# chat_app
+# WhatsApp clone
 
-A new Flutter project.
-
-## Getting Started
+A UI/UX clone of one of the most famous messaging applications i.e WhatsApp.
 
 This project is a starting point for a Flutter application.
 
