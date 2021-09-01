@@ -1,8 +1,8 @@
-import 'package:chat_app/screens/chat/conversationScreen.dart';
 import 'package:chat_app/utils/chatsTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vrouter/vrouter.dart';
 
 class ChatsScreen extends StatefulWidget {
   ChatsScreen({Key? key}) : super(key: key);
@@ -20,10 +20,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        CupertinoPageRoute(builder: (BuildContext context) {
-                      return ConversationScreen();
-                    }));
+                    context.vRouter.to('chat');
                   },
                   child: chatTile(context));
             },

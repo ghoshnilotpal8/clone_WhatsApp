@@ -1,10 +1,15 @@
 import 'package:chat_app/screens/calls/callsScreen.dart';
+import 'package:chat_app/screens/calls/onCallScreen.dart';
 import 'package:chat_app/screens/camera/cameraScreen.dart';
 import 'package:chat_app/screens/chat/chatsScreen.dart';
+import 'package:chat_app/screens/chat/conversationScreen.dart';
 import 'package:chat_app/screens/contacts/contactsScreen.dart';
+import 'package:chat_app/screens/splashScreen/splashScreen.dart';
+import 'package:chat_app/screens/status/statusPage.dart';
 import 'package:chat_app/screens/status/statusScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vrouter/vrouter.dart';
 import 'theme.dart';
 import 'constant.dart' as constant;
 
@@ -15,10 +20,29 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return VRouter(
       title: 'Chat App UI',
       theme: lightTheme(),
-      home: MainScreen(title: constant.HomePageTitle),
+      initialUrl: '/',
+      routes: [
+        VWidget(path: '/', widget: SplashScreen()),
+        VWidget(
+            path: '/home',
+            widget: MainScreen(title: constant.HomePageTitle),
+            stackedRoutes: [
+              VWidget(path: 'chat', widget: ConversationScreen()),
+              VWidget(path: 'status', widget: StatusPage()),
+              VWidget(path: 'onCall', widget: OnCallScreen()),
+              VWidget(
+                  path: 'fromChat=:fromChat',
+                  name: 'contacts',
+                  widget: ContactsScreen(),
+                  stackedRoutes: [
+                    VWidget(path: 'onCall', widget: OnCallScreen()),
+                  ]),
+            ]),
+        VRouteRedirector(path: ':_(.*)', redirectTo: '/')
+      ],
     );
   }
 }
@@ -159,19 +183,11 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         FloatingActionButton(
           onPressed: () async {
             if (_tabController.index == 1) {
-              Navigator.push(context,
-                  CupertinoPageRoute(builder: (BuildContext context) {
-                return ContactsScreen(
-                  fromChatScreen: true,
-                );
-              }));
+              context.vRouter
+                  .toNamed("contacts", pathParameters: {'fromChat': 'True'});
             } else if (_tabController.index == 3) {
-              Navigator.push(context,
-                  CupertinoPageRoute(builder: (BuildContext context) {
-                return ContactsScreen(
-                  fromChatScreen: false,
-                );
-              }));
+              context.vRouter
+                  .toNamed("contacts", pathParameters: {'fromChat': 'False'});
             }
           },
           tooltip: 'Action',

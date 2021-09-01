@@ -1,6 +1,7 @@
 import 'package:chat_app/utils/callsTile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vrouter/vrouter.dart';
 
 class CallsScreen extends StatefulWidget {
   CallsScreen({Key? key}) : super(key: key);
@@ -18,6 +19,9 @@ class _CallsScreenState extends State<CallsScreen> {
         padding: EdgeInsets.zero,
         children: [
           callsTile(
+              onTap: () {
+                context.vRouter.to('onCall');
+              },
               title: "title",
               numberOfEvent: "2",
               isMissed: false,
@@ -25,6 +29,7 @@ class _CallsScreenState extends State<CallsScreen> {
               time: "6:10pm",
               isVideoCall: false),
           callsTile(
+              onTap: () {},
               title: "title",
               numberOfEvent: "1",
               isMissed: true,
@@ -32,6 +37,7 @@ class _CallsScreenState extends State<CallsScreen> {
               time: "6:10pm",
               isVideoCall: false),
           callsTile(
+              onTap: () {},
               title: "title",
               numberOfEvent: "1",
               isMissed: true,
@@ -39,6 +45,7 @@ class _CallsScreenState extends State<CallsScreen> {
               time: "6:10pm",
               isVideoCall: false),
           callsTile(
+              onTap: () {},
               title: "title",
               numberOfEvent: "1",
               isMissed: true,
@@ -46,6 +53,7 @@ class _CallsScreenState extends State<CallsScreen> {
               time: "6:10pm",
               isVideoCall: true),
           callsTile(
+              onTap: () {},
               title: "title",
               numberOfEvent: "2",
               isMissed: true,

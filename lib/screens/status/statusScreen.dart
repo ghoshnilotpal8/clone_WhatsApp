@@ -1,7 +1,7 @@
 import 'package:chat_app/utils/myStatusTile.dart';
-import 'package:chat_app/screens/status/statusPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:vrouter/vrouter.dart';
 
 import '../../theme.dart';
 
@@ -21,19 +21,15 @@ class _StatusScreenState extends State<StatusScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return StatusPage();
-                  }));
-                },
-                child: myStatusTile()),
+            myStatusTile(onTap: () {
+              context.vRouter.to('status');
+            }),
             Text(
               "Recent updates",
               style: lightTheme().textTheme.subtitle2,
             ),
-            myStatusTile(),
-            myStatusTile()
+            myStatusTile(onTap: () {}),
+            myStatusTile(onTap: () {})
           ],
         ),
       ),

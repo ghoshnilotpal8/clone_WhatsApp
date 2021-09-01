@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 
 Widget callsTile(
-    {required String title,
+    {required Function() onTap,
+    required String title,
     required String numberOfEvent,
     required bool isMissed,
     required String date,
     required String time,
     required bool isVideoCall}) {
   return ListTile(
+    onTap: onTap,
     leading: CircleAvatar(),
     title: Text(title),
     subtitle: Row(

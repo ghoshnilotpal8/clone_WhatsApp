@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../theme.dart';
 
-Widget myStatusTile() {
+Widget myStatusTile({required Function() onTap}) {
   return ListTile(
+    onTap: onTap,
     contentPadding: EdgeInsets.only(left: 0),
     leading: Stack(
       children: [CircleAvatar()],
