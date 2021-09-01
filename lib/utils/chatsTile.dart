@@ -1,4 +1,6 @@
+import 'package:chat_app/theme.dart';
 import 'package:flutter/material.dart';
+// import 'package:chat_app/constant.dart' as constant;
 
 Widget chatTile(BuildContext context) {
   return Padding(
@@ -19,7 +21,16 @@ Widget chatTile(BuildContext context) {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text("Nilotpal Ghosh"), Text("6:14 pm")],
+                    children: [
+                      Text(
+                        "Nilotpal Ghosh",
+                        style: lightTheme().textTheme.headline2,
+                      ),
+                      Text(
+                        "6:14 pm",
+                        style: lightTheme().textTheme.subtitle1,
+                      )
+                    ],
                   ),
                   Row(
                     children: [
@@ -28,9 +39,13 @@ Widget chatTile(BuildContext context) {
                         child: Icon(
                           Icons.done_all,
                           size: 20,
+                          color: Colors.white,
                         ),
                       ),
-                      Text("Hey, How are you man ?"),
+                      Text(
+                        "Hey, How are you man ?",
+                        style: lightTheme().textTheme.headline4,
+                      ),
                     ],
                   )
                 ],

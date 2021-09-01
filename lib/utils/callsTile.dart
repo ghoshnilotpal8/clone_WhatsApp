@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme.dart';
+
 Widget callsTile(
     {required String title,
     required String numberOfEvent,
@@ -15,17 +17,36 @@ Widget callsTile(
         isMissed
             ? Icon(
                 Icons.south_west,
-                color: Colors.red,
+                color: Colors.redAccent.shade100,
               )
             : Icon(
                 Icons.north_east,
-                color: Colors.green,
+                color: Colors.greenAccent,
               ),
-        numberOfEvent == "1" ? Container() : Text(" ($numberOfEvent)"),
-        Text(" $date,"),
-        Text(" $time")
+        numberOfEvent == "1"
+            ? Container()
+            : Text(
+                " ($numberOfEvent)",
+                style: lightTheme().textTheme.subtitle2,
+              ),
+        Text(
+          " $date,",
+          style: lightTheme().textTheme.subtitle1,
+        ),
+        Text(
+          " $time",
+          style: lightTheme().textTheme.subtitle1,
+        )
       ],
     ),
-    trailing: isVideoCall ? Icon(Icons.videocam) : Icon(Icons.call),
+    trailing: isVideoCall
+        ? Icon(
+            Icons.videocam,
+            color: Colors.white,
+          )
+        : Icon(
+            Icons.call,
+            color: Colors.white,
+          ),
   );
 }

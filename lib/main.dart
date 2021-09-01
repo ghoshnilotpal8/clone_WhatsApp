@@ -1,8 +1,11 @@
 import 'package:chat_app/screens/calls/callsScreen.dart';
 import 'package:chat_app/screens/camera/cameraScreen.dart';
 import 'package:chat_app/screens/chat/chatsScreen.dart';
+import 'package:chat_app/screens/contacts/contactsScreen.dart';
 import 'package:chat_app/screens/status/statusScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'theme.dart';
 import 'constant.dart' as constant;
 
 void main() {
@@ -14,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chat App UI',
+      theme: lightTheme(),
       home: MainScreen(title: constant.HomePageTitle),
     );
   }
@@ -33,7 +37,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   late AnimationController _miniFabAnimationController;
   late Animation<double> _miniFabAnimation;
   double scrollOfset = 0.0;
-  int globalIndexForFAB = 1;
+  // int globalIndexForFAB = 1;
   final screenList = <Widget>[
     CameraScreen(),
     ChatsScreen(),
@@ -55,7 +59,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             tabAndAppbarAnimation();
             miniFabAnimationControllerListner();
             setState(() {
-              globalIndexForFAB = _tabController.index;
+              // globalIndexForFAB = _tabController.index;
             });
           });
   }
@@ -64,18 +68,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  iconSelectionFunction() {
-    if (_tabController.index == 1) {
-      return Icon(Icons.message);
-    } else if (_tabController.index == 2) {
-      return Icon(Icons.camera_alt);
-    } else if (_tabController.index == 3) {
-      return Icon(Icons.add_call);
-    } else {
-      return Container();
-    }
   }
 
   tabAndAppbarAnimation() {
@@ -89,7 +81,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   }
 
   miniFabAnimationControllerListner() {
-    print(_tabController.index);
     _tabController.index == 2
         ? _miniFabAnimationController.forward()
         : _miniFabAnimationController.reverse();
@@ -122,6 +113,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   _tabController.animateTo(i);
                 },
                 indicatorSize: TabBarIndicatorSize.tab,
+                indicatorColor: Colors.white,
                 controller: _tabController,
                 tabs: [
                   Icon(Icons.camera_alt),
@@ -155,7 +147,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 offset: Offset(4, _miniFabAnimation.value),
                 child: FloatingActionButton(
                   mini: true,
-                  onPressed: () {},
+                  onPressed: () {
+                    print("Nice");
+                  },
                   tooltip: 'add status',
                   child: Icon(Icons.edit),
                   heroTag: null,
@@ -163,12 +157,40 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               );
             }),
         FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            if (_tabController.index == 1) {
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (BuildContext context) {
+                return ContactsScreen(
+                  fromChatScreen: true,
+                );
+              }));
+            } else if (_tabController.index == 3) {
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (BuildContext context) {
+                return ContactsScreen(
+                  fromChatScreen: false,
+                );
+              }));
+            }
+          },
           tooltip: 'Action',
           child: iconSelectionFunction(),
           heroTag: null,
         ),
       ],
     );
+  }
+
+  iconSelectionFunction() {
+    if (_tabController.index == 1) {
+      return Icon(Icons.message);
+    } else if (_tabController.index == 2) {
+      return Icon(Icons.camera_alt);
+    } else if (_tabController.index == 3) {
+      return Icon(Icons.add_call);
+    } else {
+      return Container();
+    }
   }
 }

@@ -3,6 +3,8 @@ import 'package:chat_app/screens/status/statusPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../theme.dart';
+
 class StatusScreen extends StatefulWidget {
   StatusScreen({Key? key}) : super(key: key);
 
@@ -26,7 +28,10 @@ class _StatusScreenState extends State<StatusScreen> {
                   }));
                 },
                 child: myStatusTile()),
-            Text("Recent updates"),
+            Text(
+              "Recent updates",
+              style: lightTheme().textTheme.subtitle2,
+            ),
             myStatusTile(),
             myStatusTile()
           ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/constant.dart' as constant;
+import '../../theme.dart';
 
 Widget leftAlignedChatBubble(context, {required String text}) {
   return Padding(
@@ -7,20 +9,26 @@ Widget leftAlignedChatBubble(context, {required String text}) {
     child: Wrap(alignment: WrapAlignment.start, children: [
       Container(
         decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Color(constant.primaryColor),
             borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-                topRight: Radius.circular(20))),
+                bottomRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                topRight: Radius.circular(10))),
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(text),
+              Text(
+                text,
+                style: lightTheme().textTheme.headline2,
+              ),
               Padding(
                 padding: EdgeInsets.all(2.0),
-                child: Text("6:04am"),
+                child: Text(
+                  "6:04am",
+                  style: lightTheme().textTheme.subtitle1,
+                ),
               ),
             ],
           ),
